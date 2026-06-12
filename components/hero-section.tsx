@@ -58,10 +58,10 @@ export function HeroSection() {
       <div className="absolute bottom-8 right-8 w-20 h-20 border-r-2 border-b-2 border-neon-cyan/30" />
 
       <div className="relative z-10 text-center px-4 max-w-5xl mx-auto">
-        <div className="inline-flex items-center gap-2 px-4 py-2 mb-8 border border-neon-cyan/30 bg-secondary/50 backdrop-blur-sm">
+        {/* <div className="inline-flex items-center gap-2 px-4 py-2 mb-8 border border-neon-cyan/30 bg-secondary/50 backdrop-blur-sm">
           <span className="w-2 h-2 bg-neon-green rounded-full animate-pulse" />
           <span className="text-sm text-neon-cyan tracking-widest uppercase">{siteContent.hero.status}</span>
-        </div>
+        </div> */}
 
         <h1
           className={`font-[family-name:var(--font-orbitron)] text-5xl md:text-7xl lg:text-8xl font-bold mb-6 tracking-tight ${glitchActive ? "animate-glitch" : ""}`}

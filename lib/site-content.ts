@@ -56,7 +56,7 @@ export const siteContent = {
     mobileCloseLabel: "Cerrar menu",
   },
   hero: {
-    status: "System online",
+    status: "",
     description:
       "Desarrollador full stack enfocado en construir soluciones web modernas, escalables y mantenibles. Mezclo frontend, backend, nube e integraciones con IA para sacar productos digitales que resuelvan problemas reales.",
     socialLinks: [
@@ -129,7 +129,7 @@ export const siteContent = {
     ],
   },
   contact: {
-    formEndpoint: "https://formspree.io/f/xqeopneb",
+    formEndpoint: "http://localhost:8000/api/forms/TU_PUBLIC_KEY/submit",
     eyebrow: "Contacto",
     title: "Conversemos",
     highlight: "Hoy",
@@ -149,16 +149,18 @@ export const siteContent = {
     fields: {
       name: "nombre",
       email: "correo",
+      phone: "telefono",
       message: "mensaje",
     },
     placeholders: {
       name: "Tu nombre",
-      email: "devrowslabs@gmail.com",
+      email: "tu@email.com",
+      phone: "+56 9...",
       message: "Cuéntame brevemente qué necesitas",
     },
     submitLabel: "Enviar mensaje",
     submittingLabel: "Enviando...",
-    honeypotField: "company",
+    honeypotField: "website",
   },
   footer: {
     tagline:
