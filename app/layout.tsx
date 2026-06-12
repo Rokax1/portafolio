@@ -1,6 +1,6 @@
 import type { Metadata } from 'next'
 import { Orbitron, Space_Mono } from 'next/font/google'
-import { Analytics } from '@vercel/analytics/next'
+import { withBasePath } from '@/lib/base-path'
 import { siteContent } from '@/lib/site-content'
 import './globals.css'
 
@@ -21,9 +21,9 @@ export const metadata: Metadata = {
   title: siteContent.metadata.title,
   description: siteContent.metadata.description,
   icons: {
-    icon: '/devrows.ico',
-    shortcut: '/devrows.ico',
-    apple: '/apple-icon.png',
+    icon: withBasePath('/devrows.ico'),
+    shortcut: withBasePath('/devrows.ico'),
+    apple: withBasePath('/apple-icon.png'),
   },
 }
 
@@ -36,7 +36,6 @@ export default function RootLayout({
     <html lang="es-CL" className={`${orbitron.variable} ${spaceMono.variable}`}>
       <body className="font-mono antialiased overflow-x-hidden">
         {children}
-        {process.env.NODE_ENV === 'production' && <Analytics />}
       </body>
     </html>
   )

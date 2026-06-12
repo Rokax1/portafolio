@@ -2,6 +2,7 @@
 
 import { useState } from "react"
 import { ExternalLink, Github, Zap } from "lucide-react"
+import { withBasePath } from "@/lib/base-path"
 
 interface ProjectCardProps {
   title: string
@@ -29,6 +30,7 @@ export function ProjectCard({
   sourceLabel,
 }: ProjectCardProps) {
   const [isHovered, setIsHovered] = useState(false)
+  const projectImageSrc = withBasePath(imageSrc)
 
   return (
     <article
@@ -56,7 +58,7 @@ export function ProjectCard({
       <div className="relative aspect-video overflow-hidden">
         <div
           className="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-110"
-          style={{ backgroundImage: `url(${imageSrc})` }}
+          style={{ backgroundImage: `url(${projectImageSrc})` }}
         />
         <div className="absolute inset-0 bg-gradient-to-t from-card via-card/50 to-transparent" />
 
