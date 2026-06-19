@@ -9,40 +9,45 @@ export function ContactSection() {
   const [formData, setFormData] = useState({
     name: "",
     email: "",
+    phone: "",
     message: "",
-    company: "",
+    website: "",
   })
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [submitted, setSubmitted] = useState(false)
   const [submitFailed, setSubmitFailed] = useState(false)
+  const [submitMessage, setSubmitMessage] = useState("")
+  const turnstileSiteKey = process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY
+  const formEndpoint = process.env.NEXT_PUBLIC_CONTACT_FORM_ENDPOINT || contact.formEndpoint
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     setIsSubmitting(true)
     setSubmitFailed(false)
+    setSubmitMessage("")
 
     try {
-      const response = await fetch(contact.formEndpoint, {
+      const data = new FormData(e.currentTarget)
+
+      const response = await fetch(formEndpoint, {
         method: "POST",
         headers: {
-          "Content-Type": "application/json",
           Accept: "application/json",
         },
-        body: JSON.stringify({
-          name: formData.name,
-          email: formData.email,
-          message: formData.message,
-          [contact.honeypotField]: formData.company,
-          _subject: `Nuevo mensaje desde ${siteContent.branding.navLogo}`,
-        }),
+        body: data,
       })
 
-      if (!response.ok) {
+      const json = await response.json().catch(() => null)
+
+      if (!response.ok || !json?.success) {
+        setSubmitMessage(json?.message || contact.errorText)
         throw new Error("submit_failed")
       }
 
+      setSubmitMessage(json.message || contact.successText)
       setSubmitted(true)
-      setFormData({ name: "", email: "", message: "", company: "" })
+      setFormData({ name: "", email: "", phone: "", message: "", website: "" })
+      e.currentTarget.reset()
     } catch {
       setSubmitFailed(true)
     } finally {
@@ -132,7 +137,7 @@ export function ContactSection() {
                   <h3 className="font-[family-name:var(--font-orbitron)] text-xl font-bold text-foreground mb-2">
                     {contact.successTitle}
                   </h3>
-                  <p className="text-muted-foreground">{contact.successText}</p>
+                  <p className="text-muted-foreground">{submitMessage || contact.successText}</p>
                 </div>
               ) : (
                 <div className="space-y-6">
@@ -142,7 +147,7 @@ export function ContactSection() {
                         {contact.errorTitle}
                       </h3>
                       <p className="text-sm text-muted-foreground">
-                        {contact.errorText}{" "}
+                        {submitMessage || contact.errorText}{" "}
                         <a href={`mailto:${contact.emailAddress}`} className="text-neon-cyan hover:underline">
                           {contact.emailAddress}
                         </a>
@@ -155,8 +160,8 @@ export function ContactSection() {
                     name={contact.honeypotField}
                     tabIndex={-1}
                     autoComplete="off"
-                    value={formData.company}
-                    onChange={(e) => setFormData({ ...formData, company: e.target.value })}
+                    value={formData.website}
+                    onChange={(e) => setFormData({ ...formData, website: e.target.value })}
                     className="hidden"
                     aria-hidden="true"
                   />
@@ -194,6 +199,21 @@ export function ContactSection() {
                   </div>
 
                   <div>
+                    <label htmlFor="phone" className="block text-sm text-muted-foreground mb-2 font-mono">
+                      {">"} {contact.fields.phone}:
+                    </label>
+                    <input
+                      type="tel"
+                      id="phone"
+                      name="phone"
+                      value={formData.phone}
+                      onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
+                      className="w-full px-4 py-3 bg-secondary border border-border text-foreground placeholder:text-muted-foreground/50 focus:border-neon-cyan focus:outline-none focus:ring-1 focus:ring-neon-cyan transition-colors"
+                      placeholder={contact.placeholders.phone}
+                    />
+                  </div>
+
+                  <div>
                     <label htmlFor="message" className="block text-sm text-muted-foreground mb-2 font-mono">
                       {">"} {contact.fields.message}:
                     </label>
@@ -208,6 +228,13 @@ export function ContactSection() {
                       placeholder={contact.placeholders.message}
                     />
                   </div>
+
+                  {turnstileSiteKey && (
+                    <div
+                      className="cf-turnstile flex min-h-16 items-center justify-center border border-border bg-secondary"
+                      data-sitekey={turnstileSiteKey}
+                    />
+                  )}
 
                   <button
                     type="submit"

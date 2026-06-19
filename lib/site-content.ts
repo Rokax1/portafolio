@@ -29,7 +29,7 @@ export type Skill = {
 
 export const siteContent = {
   metadata: {
-    title: "DEV // Portafolio",
+    title: "Leandro Sepulveda - Desarrollador Full Stack",
     description:
       "Portafolio de desarrollador con foco en productos web modernos, automatizacion, integraciones con IA y experiencias digitales de alto impacto.",
   },
