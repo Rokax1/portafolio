@@ -4,7 +4,7 @@ const basePath = isGithubPagesBuild ? `/${repoName}` : ""
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  output: "export",
+  output: isGithubPagesBuild ? "export" : "standalone",
   trailingSlash: true,
   typescript: {
     ignoreBuildErrors: true,
