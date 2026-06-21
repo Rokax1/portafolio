@@ -23,8 +23,7 @@ export const metadata: Metadata = {
   icons: {
     icon: withBasePath('/devrows.ico'),
     shortcut: withBasePath('/devrows.ico'),
-    apple: withBasePath('/apple-icon.png'),
-  },
+    },
 }
 
 export default function RootLayout({

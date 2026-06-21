@@ -132,6 +132,11 @@
   100% { background-position: 0% 50%; }
 }
 
+@keyframes skills-marquee {
+  0% { transform: translate3d(0, 0, 0); }
+  100% { transform: translate3d(var(--marquee-shift, -33.333%), 0, 0); }
+}
+
 .animate-glitch {
   animation: glitch 0.3s ease-in-out;
 }
@@ -147,6 +152,15 @@
 .animate-border-flow {
   background-size: 200% 200%;
   animation: border-flow 3s ease infinite;
+}
+
+.skills-marquee {
+  animation: skills-marquee 20s linear infinite;
+  will-change: transform;
+}
+
+.skills-marquee:hover {
+  animation-play-state: paused;
 }
 
 /* Neon Glow Effects */

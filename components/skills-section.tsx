@@ -1,5 +1,6 @@
 "use client"
 
+import type { CSSProperties } from "react"
 import { useEffect, useRef, useState } from "react"
 import { siteContent } from "@/lib/site-content"
 
@@ -7,89 +8,141 @@ interface Skill {
   name: string
   level: number
   category: string
+  iconSrc?: string
+  iconColor?: string
+  iconMode?: "image" | "mask"
 }
 
 const skills: Skill[] = [...siteContent.skills.items]
 const categories = [...siteContent.skills.categories]
+const MARQUEE_COPIES = 3
 
-function SkillBar({ skill, isVisible }: { skill: Skill; isVisible: boolean }) {
-  const [animatedLevel, setAnimatedLevel] = useState(0)
-
-  useEffect(() => {
-    if (isVisible) {
-      const timeout = setTimeout(() => {
-        setAnimatedLevel(skill.level)
-      }, 100)
-      return () => clearTimeout(timeout)
-    }
-  }, [isVisible, skill.level])
+function SkillIconTile({ skill, accent }: { skill: Skill; accent: string }) {
+  const [imageFailed, setImageFailed] = useState(false)
+  const useMask = Boolean(skill.iconSrc) && skill.iconMode === "mask"
+  const showImage = Boolean(skill.iconSrc) && !imageFailed && !useMask
+  const iconColor = skill.iconColor ?? accent
 
   return (
-    <div className="group">
-      <div className="flex justify-between items-center mb-2">
-        <span className="text-sm text-foreground group-hover:text-neon-cyan transition-colors">{skill.name}</span>
-        <span className="text-xs text-neon-cyan font-mono">{animatedLevel}%</span>
-      </div>
-      <div className="relative h-2 bg-secondary overflow-hidden">
+    <article
+      className="group relative flex h-[164px] w-[152px] shrink-0 flex-col justify-between overflow-hidden border border-white/10 bg-card/45 p-4 backdrop-blur-sm transition-all duration-300 hover:-translate-y-1"
+      style={{
+        boxShadow: "inset 0 0 0 1px rgba(255,255,255,0.02)",
+      }}
+    >
+      <div
+        className="absolute inset-0 opacity-0 transition-opacity duration-300 group-hover:opacity-100"
+        style={{
+          background: `linear-gradient(135deg, ${accent}22, transparent 55%, ${accent}18)`,
+        }}
+      />
+      <div className="absolute inset-x-3 top-0 h-px bg-gradient-to-r from-transparent via-white/25 to-transparent" />
+      <div className="absolute inset-y-3 right-0 w-px bg-gradient-to-b from-transparent via-white/15 to-transparent" />
+
+      <div
+        className="relative flex h-24 items-center justify-center border border-dashed border-white/12 bg-background/50 p-3 transition-all duration-300 group-hover:border-current group-hover:bg-background/70"
+        style={{ color: accent }}
+      >
         <div
-          className="absolute inset-0 opacity-30"
+          className="absolute inset-x-5 bottom-3 h-px opacity-70 transition-opacity duration-300 group-hover:opacity-100"
           style={{
-            backgroundImage:
-              "repeating-linear-gradient(90deg, transparent, transparent 8px, rgba(0, 220, 255, 0.1) 8px, rgba(0, 220, 255, 0.1) 10px)",
+            background: `linear-gradient(90deg, transparent, ${accent}55, transparent)`,
           }}
         />
-        <div
-          className="h-full bg-gradient-to-r from-neon-cyan to-neon-magenta transition-all duration-1000 ease-out relative"
-          style={{ width: `${animatedLevel}%` }}
-        >
-          <div className="absolute right-0 top-0 bottom-0 w-8 bg-gradient-to-r from-transparent to-white/30" />
-        </div>
-        <div
-          className="absolute top-0 bottom-0 w-0.5 bg-neon-cyan transition-all duration-1000 ease-out"
-          style={{
-            left: `${animatedLevel}%`,
-            boxShadow: "0 0 10px rgba(0, 220, 255, 0.8)",
-          }}
-        />
+        {useMask ? (
+          <div
+            className="relative z-10 h-13 w-13 transition-all duration-300 group-hover:scale-105"
+            style={
+              {
+                backgroundColor: iconColor,
+                WebkitMaskImage: `url(${skill.iconSrc})`,
+                maskImage: `url(${skill.iconSrc})`,
+                WebkitMaskRepeat: "no-repeat",
+                maskRepeat: "no-repeat",
+                WebkitMaskPosition: "center",
+                maskPosition: "center",
+                WebkitMaskSize: "contain",
+                maskSize: "contain",
+                filter: "drop-shadow(0 0 0 rgba(0,0,0,0))",
+              } as CSSProperties
+            }
+          />
+        ) : showImage ? (
+          <img
+            src={skill.iconSrc}
+            alt={skill.name}
+            width={52}
+            height={52}
+            onError={() => setImageFailed(true)}
+            className="relative z-10 h-13 w-13 object-contain opacity-95 transition-all duration-300 group-hover:scale-105 group-hover:opacity-100"
+          />
+        ) : (
+          <div className="relative z-10 h-12 w-12 transition-all duration-300 group-hover:scale-105">
+            <div className="absolute inset-0 rotate-45 border border-current/40 bg-current/8 transition-all duration-300 group-hover:border-current group-hover:bg-current/12" />
+            <div className="absolute inset-[9px] border border-current/30" />
+          </div>
+        )}
       </div>
-    </div>
+
+      <div className="relative space-y-2">
+        <h4 className="text-sm font-semibold tracking-[0.18em] uppercase text-white/45 transition-colors duration-300 group-hover:text-white">
+          {skill.name}
+        </h4>
+        <div className="h-px w-full bg-gradient-to-r from-white/0 via-white/10 to-white/0 transition-all duration-300 group-hover:via-current" style={{ color: accent }} />
+      </div>
+    </article>
   )
 }
 
-function CategoryCard({ category, skills, isVisible }: { category: string; skills: Skill[]; isVisible: boolean }) {
+function SkillsCarouselRow({ category, skills, isVisible, index }: { category: string; skills: Skill[]; isVisible: boolean; index: number }) {
   const categoryColors: Record<string, string> = {
-    Frontend: "border-neon-cyan/30 hover:border-neon-cyan",
-    Backend: "border-neon-magenta/30 hover:border-neon-magenta",
-    DevOps: "border-neon-green/30 hover:border-neon-green",
-    Diseno: "border-neon-yellow/30 hover:border-neon-yellow",
+    Frontend: "var(--neon-cyan)",
+    Backend: "var(--neon-magenta)",
+    DevOps: "var(--neon-green)",
+    Diseno: "var(--neon-yellow)",
   }
 
-  const iconColors: Record<string, string> = {
-    Frontend: "text-neon-cyan",
-    Backend: "text-neon-magenta",
-    DevOps: "text-neon-green",
-    Diseno: "text-neon-yellow",
-  }
+  const accent = categoryColors[category]
+  const repeatedSkills = Array.from({ length: MARQUEE_COPIES }, () => skills).flat()
 
   return (
-    <div className={`relative p-6 bg-card/50 backdrop-blur-sm border transition-all duration-300 ${categoryColors[category]}`}>
-      <div className="flex items-center gap-3 mb-6">
-        <div className={`w-3 h-3 rotate-45 ${iconColors[category]} bg-current`} />
+    <div
+      className={`relative overflow-hidden border border-white/10 bg-card/35 px-4 py-6 backdrop-blur-sm transition-all duration-700 ${isVisible ? "translate-y-0 opacity-100" : "translate-y-8 opacity-0"}`}
+      style={{
+        transitionDelay: `${index * 120}ms`,
+      }}
+    >
+      <div
+        className="absolute inset-0 opacity-60"
+        style={{
+          background: `linear-gradient(90deg, ${accent}10, transparent 18%, transparent 82%, ${accent}10)`,
+        }}
+      />
+      <div className="absolute left-0 top-0 h-px w-full bg-gradient-to-r from-transparent via-white/15 to-transparent" />
+
+      <div className="relative mb-5 flex items-center gap-3">
+        <div className="h-3 w-3 rotate-45 bg-current" style={{ color: accent }} />
         <h3 className="font-[family-name:var(--font-orbitron)] text-lg font-bold text-foreground tracking-wider">
           {category.toUpperCase()}
         </h3>
       </div>
 
-      <div className="space-y-4">
-        {skills.map((skill) => (
-          <SkillBar key={skill.name} skill={skill} isVisible={isVisible} />
-        ))}
+      <div className="relative overflow-hidden">
+        <div className="pointer-events-none absolute inset-y-0 left-0 z-10 w-16 bg-gradient-to-r from-secondary to-transparent" />
+        <div className="pointer-events-none absolute inset-y-0 right-0 z-10 w-16 bg-gradient-to-l from-secondary to-transparent" />
+        <div
+          className="skills-marquee flex w-max gap-4"
+          style={{
+            animationDirection: index % 2 === 0 ? "normal" : "reverse",
+            animationPlayState: isVisible ? "running" : "paused",
+            ["--marquee-shift" as string]: `calc(-100% / ${MARQUEE_COPIES})`,
+          }}
+        >
+          {repeatedSkills.map((skill, skillIndex) => (
+            <SkillIconTile key={`${category}-${skill.name}-${skillIndex}`} skill={skill} accent={accent} />
+          ))}
+        </div>
       </div>
-
-      <div className="absolute top-0 left-0 w-3 h-3 border-l border-t border-current opacity-50" />
-      <div className="absolute top-0 right-0 w-3 h-3 border-r border-t border-current opacity-50" />
-      <div className="absolute bottom-0 left-0 w-3 h-3 border-l border-b border-current opacity-50" />
-      <div className="absolute bottom-0 right-0 w-3 h-3 border-r border-b border-current opacity-50" />
     </div>
   )
 }
@@ -137,10 +190,11 @@ export function SkillsSection() {
           <p className="mt-4 text-muted-foreground max-w-2xl mx-auto">{siteContent.skills.description}</p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div className="space-y-6">
           {categories.map((category) => (
-            <CategoryCard
+            <SkillsCarouselRow
               key={category}
+              index={categories.indexOf(category)}
               category={category}
               skills={skills.filter((skill) => skill.category === category)}
               isVisible={isVisible}

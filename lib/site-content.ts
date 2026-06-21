@@ -25,6 +25,9 @@ export type Skill = {
   name: string
   level: number
   category: string
+  iconSrc?: string
+  iconColor?: string
+  iconMode?: "image" | "mask"
 }
 
 export const siteContent = {
@@ -106,20 +109,22 @@ export const siteContent = {
     highlight: "Técnicas",
     description:
       "Experiencia trabajando con tecnologías modernas, mejorando procesos y adaptándome rápido a contextos de producto, negocio y ejecución técnica.",
-    categories: ["Frontend", "Backend", "DevOps", "Diseno"],
+    categories: ["Frontend", "Backend", "DevOps"],
     items: [
-      { name: "Next.js", level: 95, category: "Frontend" },
-      { name: "TypeScript", level: 92, category: "Frontend" },
-      { name: "Bootstrap", level: 85, category: "Frontend" },
-      { name: "Tailwind CSS", level: 98, category: "Frontend" },
-      { name: "Node.js", level: 90, category: "Backend" },
-      { name: "Laravel", level: 90, category: "Backend" },
-      { name: "NestJS", level: 90, category: "Backend" },
-      { name: "PostgreSQL / MariaDB", level: 88, category: "Backend" },
-      { name: "Docker", level: 80, category: "DevOps" },
-      { name: "AWS / OVH", level: 85, category: "DevOps" },
-      { name: "Git / CI/CD", level: 92, category: "DevOps" },
-      { name: "Figma", level: 78, category: "Diseno" },
+      { name: "Next.js", level: 95, category: "Frontend", iconSrc: "/skills/nextjs.svg", iconMode: "mask", iconColor: "#FFFFFF" },
+      { name: "TypeScript", level: 92, category: "Frontend", iconSrc: "/skills/typescript.svg", iconMode: "mask", iconColor: "#3178C6" },
+      { name: "Bootstrap", level: 85, category: "Frontend", iconSrc: "/skills/bootstrap.svg", iconMode: "mask", iconColor: "#7952B3" },
+      { name: "Tailwind", level: 98, category: "Frontend", iconSrc: "/skills/tailwindcss.svg", iconMode: "mask", iconColor: "#06B6D4" },
+      { name: "Node.js", level: 90, category: "Backend", iconSrc: "/skills/nodedotjs.svg", iconMode: "mask", iconColor: "#5FA04E" },
+      { name: "Laravel", level: 90, category: "Backend", iconSrc: "/skills/laravel.svg", iconMode: "mask", iconColor: "#FF2D20" },
+      { name: "NestJS", level: 90, category: "Backend", iconSrc: "/skills/nestjs.svg", iconMode: "mask", iconColor: "#E0234E" },
+      { name: "MariaDB", level: 88, category: "Backend", iconSrc: "/skills/mariadb.svg", iconMode: "mask", iconColor: "#003545" },
+      { name: "PostgreSQL", level: 88, category: "Backend", iconSrc: "/skills/postgresql.svg", iconMode: "mask", iconColor: "#4169E1" },
+      { name: "Docker", level: 80, category: "DevOps", iconSrc: "/skills/docker.svg", iconMode: "mask", iconColor: "#0816dd" },
+      { name: "OVH", level: 85, category: "DevOps", iconSrc: "/skills/ovh.svg", iconMode: "mask", iconColor: "#0816dd" },
+      { name: "AWS", level: 85, category: "DevOps", iconSrc: "/skills/aws.svg", iconMode: "mask", iconColor: "#FF9900" },
+      { name: "Git", level: 92, category: "DevOps", iconSrc: "/skills/git.svg", iconMode: "mask", iconColor: "#F05032" },
+      { name: "Figma", level: 78, category: "Frontend", iconSrc: "/skills/figma.svg", iconMode: "mask", iconColor: "#F24E1E" },
     ] satisfies Skill[],
     stats: [
       { value: "5+", label: "Años de experiencia" },
