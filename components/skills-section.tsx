@@ -120,7 +120,7 @@ function SkillsCarouselRow({ category, skills, isVisible, index }: { category: s
       />
       <div className="absolute left-0 top-0 h-px w-full bg-gradient-to-r from-transparent via-white/15 to-transparent" />
 
-      <div className="relative mb-5 flex items-center gap-3">
+      <div className="relative mb-5 flex items-center justify-center gap-3 md:justify-start">
         <div className="h-3 w-3 rotate-45 bg-current" style={{ color: accent }} />
         <h3 className="font-[family-name:var(--font-orbitron)] text-lg font-bold text-foreground tracking-wider">
           {category.toUpperCase()}

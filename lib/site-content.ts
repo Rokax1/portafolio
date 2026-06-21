@@ -86,7 +86,7 @@ export const siteContent = {
         description:
           "Participé en el desarrollo de MigraBien, proyecto finalista de la primera AI Hackathon oficial de OpenAI en Latinoamérica, realizada en Santiago de Chile. La solución usa inteligencia artificial para orientar a personas en procesos migratorios, entregando asistencia personalizada, checklist de documentos y recomendaciones según cada caso.",
         tags: ["Node.js", "LangChain", "Ionic", "OpenAI API"],
-        imageSrc: "/projects/migrabien/MigraBien.png",
+        imageSrc: "/projects/migrabien/MigraBien-cover.jpg",
         liveUrl: undefined,
         githubUrl: undefined,
         featured: true,
@@ -96,7 +96,7 @@ export const siteContent = {
         description:
           "Plataforma web (SAS) para la gestión integral de alojamientos, orientada a cabañas, hoteles y hostales. Permite administrar reservas, disponibilidad, huéspedes, empresas, pagos, facturas y reportes desde un dashboard centralizado. Incluye calendario tipo Gantt, check-in/check-out digital, control multipropiedad, generación de PDF y exportación de datos para gestión contable y administrativa.",
         tags: ["Laravel", "Filament", "Tailwind CSS"],
-        imageSrc: "/projects/hoteles/hotel-dashboard.png",
+        imageSrc: "/projects/hoteles/hotel-dashboard-cover.jpg",
       },
     ] satisfies Project[],
     featuredLabel: "Destacado",

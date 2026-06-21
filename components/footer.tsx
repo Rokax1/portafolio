@@ -1,6 +1,8 @@
 import { Github, Linkedin, Mail, Twitter } from "lucide-react"
 import { siteContent } from "@/lib/site-content"
 
+const currentYear = new Date().getFullYear()
+
 const iconMap = {
   github: Github,
   linkedin: Linkedin,
@@ -13,12 +15,12 @@ export function Footer() {
     <footer className="relative py-16 px-4 md:px-8 border-t border-border bg-card/30">
       <div className="max-w-7xl mx-auto">
         <div className="grid md:grid-cols-3 gap-12 items-center">
-          <div>
+          <div className="text-center md:text-left">
             <a href="#" className="inline-block font-[family-name:var(--font-orbitron)] text-2xl font-bold tracking-wider mb-4">
               <span className="text-foreground">{siteContent.branding.footerLogo.primary}</span>
               <span className="text-neon-cyan text-glow-cyan">{siteContent.branding.footerLogo.secondary}</span>
             </a>
-            <p className="text-sm text-muted-foreground max-w-xs">{siteContent.footer.tagline}</p>
+            <p className="mx-auto max-w-xs text-sm text-muted-foreground md:mx-0">{siteContent.footer.tagline}</p>
           </div>
 
           <div className="flex flex-wrap justify-center gap-6">
@@ -33,7 +35,7 @@ export function Footer() {
             ))}
           </div>
 
-          <div className="flex justify-end gap-4">
+          <div className="flex justify-center gap-4 md:justify-end">
             {siteContent.footer.socialLinks.map(({ platform, href, label }) => {
               const Icon = iconMap[platform]
 
@@ -53,7 +55,7 @@ export function Footer() {
 
         <div className="mt-12 pt-8 border-t border-border flex flex-col md:flex-row justify-between items-center gap-4">
           <p className="text-xs text-muted-foreground">
-            &copy; {new Date().getFullYear()} {siteContent.branding.footerLogo.primary}. {siteContent.footer.copyright}
+            &copy; {currentYear} {siteContent.branding.footerLogo.primary}. {siteContent.footer.copyright}
           </p>
           <div className="flex items-center gap-2 text-xs text-muted-foreground">
             <span className="w-2 h-2 bg-neon-green rounded-full animate-pulse" />

@@ -1,5 +1,6 @@
 "use client"
 
+import Image from "next/image"
 import { useState } from "react"
 import { ExternalLink, Github, Zap } from "lucide-react"
 import { withBasePath } from "@/lib/base-path"
@@ -56,9 +57,13 @@ export function ProjectCard({
       )}
 
       <div className="relative aspect-video overflow-hidden">
-        <div
-          className="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-110"
-          style={{ backgroundImage: `url(${projectImageSrc})` }}
+        <Image
+          src={projectImageSrc}
+          alt={title}
+          fill
+          priority={featured}
+          sizes={featured ? "(min-width: 768px) 66vw, 100vw" : "(min-width: 768px) 50vw, 100vw"}
+          className="object-cover transition-transform duration-700 group-hover:scale-110"
         />
         <div className="absolute inset-0 bg-gradient-to-t from-card via-card/50 to-transparent" />
 
