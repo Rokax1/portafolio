@@ -25,10 +25,7 @@ function SkillIconTile({ skill, accent }: { skill: Skill; accent: string }) {
 
   return (
     <article
-      className="group relative flex h-[164px] w-[152px] shrink-0 flex-col justify-between overflow-hidden border border-white/10 bg-card/45 p-4 backdrop-blur-sm transition-all duration-300 hover:-translate-y-1"
-      style={{
-        boxShadow: "inset 0 0 0 1px rgba(255,255,255,0.02)",
-      }}
+      className="group relative flex h-[164px] w-[152px] shrink-0 flex-col justify-between overflow-hidden p-4 backdrop-blur-sm transition-all duration-300 hover:-translate-y-1"
     >
       <div
         className="absolute inset-0 opacity-0 transition-opacity duration-300 group-hover:opacity-100"
@@ -36,13 +33,58 @@ function SkillIconTile({ skill, accent }: { skill: Skill; accent: string }) {
           background: `linear-gradient(135deg, ${accent}22, transparent 55%, ${accent}18)`,
         }}
       />
-      <div className="absolute inset-x-3 top-0 h-px bg-gradient-to-r from-transparent via-white/25 to-transparent" />
       <div className="absolute inset-y-3 right-0 w-px bg-gradient-to-b from-transparent via-white/15 to-transparent" />
 
       <div
-        className="relative flex h-24 items-center justify-center border border-dashed border-white/12 bg-background/50 p-3 transition-all duration-300 group-hover:border-current group-hover:bg-background/70"
+        className="relative flex h-24 items-center justify-center p-3 transition-all duration-300"
         style={{ color: accent }}
       >
+        <div className="absolute left-0 top-0 h-px w-4 rounded-full bg-white/20 transition-opacity duration-300 group-hover:opacity-0" />
+        <div className="absolute left-0 top-0 h-4 w-px rounded-full bg-white/20 transition-opacity duration-300 group-hover:opacity-0" />
+        <div className="absolute right-0 top-0 h-px w-4 rounded-full bg-white/20 transition-opacity duration-300 group-hover:opacity-0" />
+        <div className="absolute right-0 top-0 h-4 w-px rounded-full bg-white/20 transition-opacity duration-300 group-hover:opacity-0" />
+        <div className="absolute bottom-0 left-0 h-px w-4 rounded-full bg-white/20 transition-opacity duration-300 group-hover:opacity-0" />
+        <div className="absolute bottom-0 left-0 h-4 w-px rounded-full bg-white/20 transition-opacity duration-300 group-hover:opacity-0" />
+        <div className="absolute bottom-0 right-0 h-px w-4 rounded-full bg-white/20 transition-opacity duration-300 group-hover:opacity-0" />
+        <div className="absolute bottom-0 right-0 h-4 w-px rounded-full bg-white/20 transition-opacity duration-300 group-hover:opacity-0" />
+        <div
+          className="absolute left-0 top-0 h-px w-4 rounded-full opacity-0 blur-[1px] transition-opacity duration-300 group-hover:opacity-100"
+          style={{ backgroundColor: accent, boxShadow: `0 0 10px ${accent}` }}
+        />
+        <div
+          className="absolute left-0 top-0 h-4 w-px rounded-full opacity-0 blur-[1px] transition-opacity duration-300 group-hover:opacity-100"
+          style={{ backgroundColor: accent, boxShadow: `0 0 10px ${accent}` }}
+        />
+        <div
+          className="absolute right-0 top-0 h-px w-4 rounded-full opacity-0 blur-[1px] transition-opacity duration-300 group-hover:opacity-100"
+          style={{ backgroundColor: accent, boxShadow: `0 0 10px ${accent}` }}
+        />
+        <div
+          className="absolute right-0 top-0 h-4 w-px rounded-full opacity-0 blur-[1px] transition-opacity duration-300 group-hover:opacity-100"
+          style={{ backgroundColor: accent, boxShadow: `0 0 10px ${accent}` }}
+        />
+        <div
+          className="absolute bottom-0 left-0 h-px w-4 rounded-full opacity-0 blur-[1px] transition-opacity duration-300 group-hover:opacity-100"
+          style={{ backgroundColor: accent, boxShadow: `0 0 10px ${accent}` }}
+        />
+        <div
+          className="absolute bottom-0 left-0 h-4 w-px rounded-full opacity-0 blur-[1px] transition-opacity duration-300 group-hover:opacity-100"
+          style={{ backgroundColor: accent, boxShadow: `0 0 10px ${accent}` }}
+        />
+        <div
+          className="absolute bottom-0 right-0 h-px w-4 rounded-full opacity-0 blur-[1px] transition-opacity duration-300 group-hover:opacity-100"
+          style={{ backgroundColor: accent, boxShadow: `0 0 10px ${accent}` }}
+        />
+        <div
+          className="absolute bottom-0 right-0 h-4 w-px rounded-full opacity-0 blur-[1px] transition-opacity duration-300 group-hover:opacity-100"
+          style={{ backgroundColor: accent, boxShadow: `0 0 10px ${accent}` }}
+        />
+        <div
+          className="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-300 group-hover:opacity-100"
+          style={{
+            boxShadow: `inset 0 0 10px ${accent}1f, 0 0 12px ${accent}12, 0 0 24px ${accent}0d`,
+          }}
+        />
         <div
           className="absolute inset-x-5 bottom-3 h-px opacity-70 transition-opacity duration-300 group-hover:opacity-100"
           style={{
@@ -88,7 +130,6 @@ function SkillIconTile({ skill, accent }: { skill: Skill; accent: string }) {
         <h4 className="text-sm font-semibold tracking-[0.18em] uppercase text-white/45 transition-colors duration-300 group-hover:text-white">
           {skill.name}
         </h4>
-        <div className="h-px w-full bg-gradient-to-r from-white/0 via-white/10 to-white/0 transition-all duration-300 group-hover:via-current" style={{ color: accent }} />
       </div>
     </article>
   )
@@ -107,7 +148,7 @@ function SkillsCarouselRow({ category, skills, isVisible, index }: { category: s
 
   return (
     <div
-      className={`relative overflow-hidden border border-white/10 bg-card/35 px-4 py-6 backdrop-blur-sm transition-all duration-700 ${isVisible ? "translate-y-0 opacity-100" : "translate-y-8 opacity-0"}`}
+      className={`relative overflow-hidden px-4 py-6 backdrop-blur-sm transition-all duration-700 ${isVisible ? "translate-y-0 opacity-100" : "translate-y-8 opacity-0"}`}
       style={{
         transitionDelay: `${index * 120}ms`,
       }}
@@ -118,8 +159,6 @@ function SkillsCarouselRow({ category, skills, isVisible, index }: { category: s
           background: `linear-gradient(90deg, ${accent}10, transparent 18%, transparent 82%, ${accent}10)`,
         }}
       />
-      <div className="absolute left-0 top-0 h-px w-full bg-gradient-to-r from-transparent via-white/15 to-transparent" />
-
       <div className="relative mb-5 flex items-center justify-center gap-3 md:justify-start">
         <div className="h-3 w-3 rotate-45 bg-current" style={{ color: accent }} />
         <h3 className="font-[family-name:var(--font-orbitron)] text-lg font-bold text-foreground tracking-wider">

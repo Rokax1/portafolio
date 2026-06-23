@@ -81,6 +81,14 @@ export const siteContent = {
     description:
       "Una selección de proyectos donde mezclé producto, desarrollo y automatización para resolver necesidades concretas con foco en calidad técnica y buen resultado final.",
     items: [
+        {
+        title: "Gestor de alojamientos",
+        description:
+          "Plataforma web (SAS) para la gestión integral de alojamientos, orientada a cabañas, hoteles y hostales. Permite administrar reservas, disponibilidad, huéspedes, empresas, pagos, facturas y reportes desde un dashboard centralizado. Incluye calendario tipo Gantt, check-in/check-out digital, control multipropiedad, generación de PDF y exportación de datos para gestión contable y administrativa.",
+        tags: ["Laravel", "Filament", "Tailwind CSS"],
+        imageSrc: "/projects/hoteles/hotel-dashboard-cover.jpg",
+        featured: true,
+      },
       {
         title: "MigraBien - Asistente migratorio con IA",
         description:
@@ -89,17 +97,11 @@ export const siteContent = {
         imageSrc: "/projects/migrabien/MigraBien-cover.jpg",
         liveUrl: undefined,
         githubUrl: undefined,
-        featured: true,
+        featured: false,
       },
-      {
-        title: "Gestor de alojamientos",
-        description:
-          "Plataforma web (SAS) para la gestión integral de alojamientos, orientada a cabañas, hoteles y hostales. Permite administrar reservas, disponibilidad, huéspedes, empresas, pagos, facturas y reportes desde un dashboard centralizado. Incluye calendario tipo Gantt, check-in/check-out digital, control multipropiedad, generación de PDF y exportación de datos para gestión contable y administrativa.",
-        tags: ["Laravel", "Filament", "Tailwind CSS"],
-        imageSrc: "/projects/hoteles/hotel-dashboard-cover.jpg",
-      },
+    
     ] satisfies Project[],
-    featuredLabel: "Destacado",
+    featuredLabel: "",
     liveLabel: "Ver proyecto",
     sourceLabel: "Código",
   },

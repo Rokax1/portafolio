@@ -1,5 +1,5 @@
 import type { Metadata } from 'next'
-import { Orbitron, Space_Mono } from 'next/font/google'
+import { Orbitron, Space_Grotesk } from 'next/font/google'
 import { withBasePath } from '@/lib/base-path'
 import { siteContent } from '@/lib/site-content'
 import './globals.css'
@@ -10,10 +10,9 @@ const orbitron = Orbitron({
   display: 'swap',
 });
 
-const spaceMono = Space_Mono({ 
+const spaceGrotesk = Space_Grotesk({
   subsets: ["latin"],
-  weight: ['400', '700'],
-  variable: '--font-space-mono',
+  variable: '--font-space-grotesk',
   display: 'swap',
 });
 
@@ -32,8 +31,8 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="es-CL" className={`${orbitron.variable} ${spaceMono.variable}`}>
-      <body className="font-mono antialiased overflow-x-hidden">
+    <html lang="es-CL" className={`${orbitron.variable} ${spaceGrotesk.variable}`}>
+      <body className="font-sans antialiased overflow-x-hidden">
         {children}
       </body>
     </html>

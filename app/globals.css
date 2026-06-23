@@ -16,7 +16,7 @@
   --secondary: oklch(0.15 0.02 260);
   --secondary-foreground: oklch(0.95 0.01 260);
   --muted: oklch(0.18 0.02 260);
-  --muted-foreground: oklch(0.65 0.02 260);
+  --muted-foreground: lab(94.1679% -0.518382 -3.73511);
   --accent: oklch(0.7 0.22 330);
   --accent-foreground: oklch(0.95 0.01 260);
   --destructive: oklch(0.6 0.25 25);
@@ -49,8 +49,8 @@
 }
 
 @theme inline {
-  --font-sans: 'Geist', 'Geist Fallback';
-  --font-mono: 'Geist Mono', 'Geist Mono Fallback';
+  --font-sans: var(--font-space-grotesk);
+  --font-mono: var(--font-space-grotesk);
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --color-card: var(--card);
@@ -208,8 +208,8 @@
 /* Grid Pattern Background */
 .cyber-grid {
   background-image: 
-    linear-gradient(rgba(0, 220, 255, 0.03) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(0, 220, 255, 0.03) 1px, transparent 1px);
+    linear-gradient(rgba(0, 220, 255, 0.07) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 220, 255, 0.07) 1px, transparent 1px);
   background-size: 50px 50px;
 }
 

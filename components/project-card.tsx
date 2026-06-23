@@ -1,7 +1,6 @@
 "use client"
 
 import Image from "next/image"
-import { useState } from "react"
 import { ExternalLink, Github, Zap } from "lucide-react"
 import { withBasePath } from "@/lib/base-path"
 
@@ -30,25 +29,14 @@ export function ProjectCard({
   liveLabel,
   sourceLabel,
 }: ProjectCardProps) {
-  const [isHovered, setIsHovered] = useState(false)
   const projectImageSrc = withBasePath(imageSrc)
 
   return (
     <article
       className={`group relative overflow-hidden bg-card border transition-all duration-500 ${
         featured ? "border-neon-cyan/50 md:col-span-2" : "border-border hover:border-neon-cyan/50"
-      } ${isHovered ? "neon-glow-cyan" : ""}`}
-      onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => setIsHovered(false)}
+      }`}
     >
-      <div
-        className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"
-        style={{
-          background: "linear-gradient(90deg, transparent, rgba(0, 220, 255, 0.1), transparent)",
-          animation: isHovered ? "border-flow 2s linear infinite" : "none",
-        }}
-      />
-
       {featured && (
         <div className="absolute top-4 right-4 z-20 flex items-center gap-1 px-3 py-1 bg-neon-cyan/20 border border-neon-cyan/50 backdrop-blur-sm">
           <Zap className="w-3 h-3 text-neon-cyan" />
@@ -63,16 +51,9 @@ export function ProjectCard({
           fill
           priority={featured}
           sizes={featured ? "(min-width: 768px) 66vw, 100vw" : "(min-width: 768px) 50vw, 100vw"}
-          className="object-cover transition-transform duration-700 group-hover:scale-110"
+          className="object-cover transition-transform duration-1000 ease-out group-hover:scale-[1.03]"
         />
         <div className="absolute inset-0 bg-gradient-to-t from-card via-card/50 to-transparent" />
-
-        <div
-          className={`absolute inset-0 pointer-events-none transition-opacity duration-300 ${isHovered ? "opacity-30" : "opacity-0"}`}
-          style={{
-            background: "repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0, 220, 255, 0.03) 2px, rgba(0, 220, 255, 0.03) 4px)",
-          }}
-        />
       </div>
 
       <div className="relative p-6">

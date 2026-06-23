@@ -52,10 +52,10 @@ export function HeroSection() {
         <div className="absolute w-full h-px bg-neon-cyan/50" style={{ animation: "scan-line 4s linear infinite" }} />
       </div>
 
-      <div className="absolute top-8 left-8 w-20 h-20 border-l-2 border-t-2 border-neon-cyan/30" />
-      <div className="absolute top-8 right-8 w-20 h-20 border-r-2 border-t-2 border-neon-cyan/30" />
-      <div className="absolute bottom-8 left-8 w-20 h-20 border-l-2 border-b-2 border-neon-cyan/30" />
-      <div className="absolute bottom-8 right-8 w-20 h-20 border-r-2 border-b-2 border-neon-cyan/30" />
+      <div className="absolute top-20 left-4 z-20 h-14 w-14 border-l-2 border-t-2 border-neon-cyan/30 md:top-8 md:left-8 md:h-20 md:w-20" />
+      <div className="absolute top-20 right-4 z-20 h-14 w-14 border-r-2 border-t-2 border-neon-cyan/30 md:top-8 md:right-8 md:h-20 md:w-20" />
+      <div className="absolute bottom-4 left-4 z-20 h-14 w-14 border-l-2 border-b-2 border-neon-cyan/30 md:bottom-8 md:left-8 md:h-20 md:w-20" />
+      <div className="absolute bottom-4 right-4 z-20 h-14 w-14 border-r-2 border-b-2 border-neon-cyan/30 md:bottom-8 md:right-8 md:h-20 md:w-20" />
 
       <div className="relative z-10 text-center px-4 max-w-5xl mx-auto">
         {/* <div className="inline-flex items-center gap-2 px-4 py-2 mb-8 border border-neon-cyan/30 bg-secondary/50 backdrop-blur-sm">
@@ -111,7 +111,7 @@ export function HeroSection() {
         </a>
       </div>
 
-      <div className="absolute bottom-0 left-0 right-0 h-24 bg-background clip-diagonal-top" />
+      <div className="absolute bottom-0 left-0 right-0 h-24 bg-background cyber-grid clip-diagonal-top" />
     </section>
   )
 }

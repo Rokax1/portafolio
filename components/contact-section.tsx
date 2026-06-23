@@ -57,8 +57,10 @@ export function ContactSection() {
 
   return (
     <section id="contact" className="relative py-32 px-4 md:px-8 overflow-hidden cyber-grid">
-      <div className="absolute top-1/4 right-0 w-96 h-96 bg-neon-magenta/5 rounded-full blur-3xl" />
-      <div className="absolute bottom-1/4 left-0 w-80 h-80 bg-neon-cyan/5 rounded-full blur-3xl" />
+      <div className="pointer-events-none absolute top-0 left-0 right-0 h-24 bg-gradient-to-b from-background via-background/80 to-transparent" />
+      <div className="absolute inset-0 pointer-events-none overflow-hidden opacity-20">
+        <div className="absolute w-full h-px bg-neon-cyan/50" style={{ animation: "scan-line 4s linear infinite" }} />
+      </div>
 
       <div className="relative max-w-5xl mx-auto">
         <div className="text-center mb-16">
@@ -126,7 +128,7 @@ export function ContactSection() {
                 <div className="w-3 h-3 rounded-full bg-destructive" />
                 <div className="w-3 h-3 rounded-full bg-neon-yellow" />
                 <div className="w-3 h-3 rounded-full bg-neon-green" />
-                <span className="ml-2 text-xs text-muted-foreground font-mono">{contact.formTerminalLabel}</span>
+                <span className="ml-2 text-xs text-muted-foreground font-sans">{contact.formTerminalLabel}</span>
               </div>
 
               {submitted ? (
@@ -167,7 +169,7 @@ export function ContactSection() {
                   />
 
                   <div>
-                    <label htmlFor="name" className="block text-sm text-muted-foreground mb-2 font-mono">
+                    <label htmlFor="name" className="block text-sm text-muted-foreground mb-2 font-sans">
                       {">"} {contact.fields.name}:
                     </label>
                     <input
@@ -183,7 +185,7 @@ export function ContactSection() {
                   </div>
 
                   <div>
-                    <label htmlFor="email" className="block text-sm text-muted-foreground mb-2 font-mono">
+                    <label htmlFor="email" className="block text-sm text-muted-foreground mb-2 font-sans">
                       {">"} {contact.fields.email}:
                     </label>
                     <input
@@ -199,7 +201,7 @@ export function ContactSection() {
                   </div>
 
                   <div>
-                    <label htmlFor="phone" className="block text-sm text-muted-foreground mb-2 font-mono">
+                    <label htmlFor="phone" className="block text-sm text-muted-foreground mb-2 font-sans">
                       {">"} {contact.fields.phone}:
                     </label>
                     <input
@@ -214,7 +216,7 @@ export function ContactSection() {
                   </div>
 
                   <div>
-                    <label htmlFor="message" className="block text-sm text-muted-foreground mb-2 font-mono">
+                    <label htmlFor="message" className="block text-sm text-muted-foreground mb-2 font-sans">
                       {">"} {contact.fields.message}:
                     </label>
                     <textarea

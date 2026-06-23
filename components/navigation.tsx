@@ -24,8 +24,9 @@ export function Navigation() {
       }`}
     >
       <nav className="max-w-7xl mx-auto px-4 md:px-8 h-16 flex items-center justify-between">
-        <a href="#" className="font-[family-name:var(--font-orbitron)] text-xl font-bold tracking-wider">
-          <span className="text-neon-cyan">{siteContent.branding.navLogo}</span>
+        <a href="#" className="font-[family-name:var(--font-orbitron)] text-2xl font-bold tracking-wider">
+          <span className="text-foreground">{siteContent.branding.footerLogo.primary}</span>
+          <span className="text-neon-cyan text-glow-cyan">{siteContent.branding.footerLogo.secondary}</span>
         </a>
 
         <div className="hidden md:flex items-center gap-8">
