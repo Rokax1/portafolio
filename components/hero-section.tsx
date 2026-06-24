@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react"
 import { ArrowDown, Github, Linkedin, Mail, Twitter } from "lucide-react"
 import { siteContent } from "@/lib/site-content"
+import FuzzyText from "@/components/FuzzyText"
 import RippleGrid from "@/components/RippleGrid"
 
 const roleText = siteContent.branding.role
@@ -13,10 +14,12 @@ const EXPERIMENTAL_RIPPLE_ROTATIONS = [0, 45, 90, 135, 180, 225, 270, 315, 360, 
 const EXPERIMENTAL_ROTATION_INTERVAL_MS = 7000
 // Cuánto espera después del cambio de giro antes de activar el pulso del ripple. Prueba entre 0 y 3000.
 const EXPERIMENTAL_RIPPLE_DELAY_MS = 1000
-// Cuánto tiempo se mantiene activo el pulso antes de volver a 0. Prueba entre 500 y 4000.
+// Cuánto dura el efecto sobre "Leandro". Prueba entre 200 y 1500.
+const EXPERIMENTAL_NAME_EFFECT_DURATION_MS = 500
+// Cuánto tiempo se mantiene activo el pulso del ripple del fondo antes de volver a 0. Prueba entre 500 y 4000.
 const EXPERIMENTAL_RIPPLE_DURATION_MS = 2000
 // Intensidad máxima del ripple durante el pulso. Prueba entre 0.001 y 0.03.
-const EXPERIMENTAL_RIPPLE_INTENSITY = 0.01
+const EXPERIMENTAL_RIPPLE_INTENSITY = 0.009
 // Distancia entre las líneas de la grilla. Menor valor = grilla más densa. Prueba entre 10 y 80.
 const EXPERIMENTAL_GRID_SIZE = 23
 // Fuerza/definición visual de las líneas. Menor = más suaves, mayor = más marcadas. Prueba entre 10 y 80.
@@ -40,7 +43,7 @@ const iconMap = {
 } as const
 
 export function HeroSection() {
-  const [glitchActive, setGlitchActive] = useState(false)
+  const [nameEffectActive, setNameEffectActive] = useState(false)
   const [typedText, setTypedText] = useState("")
   const [rippleRotation, setRippleRotation] = useState<(typeof EXPERIMENTAL_RIPPLE_ROTATIONS)[number]>(0)
   const [rippleIntensity, setRippleIntensity] = useState(0)
@@ -59,21 +62,20 @@ export function HeroSection() {
   }, [])
 
   useEffect(() => {
-    const glitchInterval = setInterval(() => {
-      setGlitchActive(true)
-      setTimeout(() => setGlitchActive(false), 200)
-    }, 4000)
-    return () => clearInterval(glitchInterval)
-  }, [])
-
-  useEffect(() => {
     // Experimental: easy to remove if the motion feels distracting.
     let rotationIndex = 0
     let pulseOnTimeout: ReturnType<typeof setTimeout> | undefined
     let pulseOffTimeout: ReturnType<typeof setTimeout> | undefined
+    let nameEffectOffTimeout: ReturnType<typeof setTimeout> | undefined
     const rotationInterval = setInterval(() => {
       rotationIndex = (rotationIndex + 1) % EXPERIMENTAL_RIPPLE_ROTATIONS.length
       setRippleRotation(EXPERIMENTAL_RIPPLE_ROTATIONS[rotationIndex])
+      setNameEffectActive(true)
+
+      if (nameEffectOffTimeout) clearTimeout(nameEffectOffTimeout)
+      nameEffectOffTimeout = setTimeout(() => {
+        setNameEffectActive(false)
+      }, EXPERIMENTAL_NAME_EFFECT_DURATION_MS)
 
       // Experimental: once the rotation has mostly settled, pulse the ripple briefly.
       if (pulseOnTimeout) clearTimeout(pulseOnTimeout)
@@ -92,6 +94,7 @@ export function HeroSection() {
       clearInterval(rotationInterval)
       if (pulseOnTimeout) clearTimeout(pulseOnTimeout)
       if (pulseOffTimeout) clearTimeout(pulseOffTimeout)
+      if (nameEffectOffTimeout) clearTimeout(nameEffectOffTimeout)
     }
   }, [])
 
@@ -124,10 +127,46 @@ export function HeroSection() {
           <span className="text-sm text-neon-cyan tracking-widest uppercase">{siteContent.hero.status}</span>
         </div> */}
 
-        <h1
-          className={`font-[family-name:var(--font-orbitron)] text-5xl md:text-7xl lg:text-8xl font-bold mb-6 tracking-tight ${glitchActive ? "animate-glitch" : ""}`}
-        >
-          <span className="text-foreground">{siteContent.branding.name.first}</span>
+        <h1 className="font-[family-name:var(--font-orbitron)] text-5xl md:text-7xl lg:text-8xl font-bold mb-6 tracking-tight">
+          <span className="relative inline-block align-baseline overflow-hidden">
+            <span className={`text-foreground ${nameEffectActive ? "opacity-0" : ""}`}>
+              {siteContent.branding.name.first}
+            </span>
+
+            {nameEffectActive ? (
+              <span className="pointer-events-none absolute inset-0 overflow-hidden">
+                <span
+                  aria-hidden="true"
+                  className="absolute inset-0 text-neon-cyan opacity-35"
+                  style={{ transform: "translateX(2px)" }}
+                >
+                  {siteContent.branding.name.first}
+                </span>
+                <span
+                  aria-hidden="true"
+                  className="absolute inset-0 text-white opacity-20"
+                  style={{ transform: "translateX(-2px)" }}
+                >
+                  {siteContent.branding.name.first}
+                </span>
+                <FuzzyText
+                  baseIntensity={0.04}
+                  hoverIntensity={0.04}
+                  enableHover={false}
+                  fontSize="1em"
+                  fontWeight={700}
+                  fontFamily="var(--font-orbitron)"
+                  color="#f5f7fa"
+                  fuzzRange={2}
+                  direction="vertical"
+                  tightFit
+                  className="absolute inset-0 h-full w-full opacity-25"
+                >
+                  {siteContent.branding.name.first}
+                </FuzzyText>
+              </span>
+            ) : null}
+          </span>
           <span className="text-neon-cyan text-glow-cyan"> {siteContent.branding.name.last}</span>
         </h1>
 
