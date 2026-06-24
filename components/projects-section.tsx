@@ -34,6 +34,7 @@ export function ProjectsSection() {
               liveUrl={project.liveUrl}
               githubUrl={project.githubUrl}
               featured={project.featured}
+              accentBorder={project.title === "MigraBien - Asistente migratorio con IA"}
               featuredLabel={section.featuredLabel}
               liveLabel={section.liveLabel}
               sourceLabel={section.sourceLabel}

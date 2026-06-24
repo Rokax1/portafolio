@@ -2,6 +2,7 @@
 
 import type { CSSProperties } from "react"
 import { useEffect, useRef, useState } from "react"
+import LogoLoop, { type LogoItem } from "@/components/LogoLoop"
 import { siteContent } from "@/lib/site-content"
 
 interface Skill {
@@ -15,8 +16,6 @@ interface Skill {
 
 const skills: Skill[] = [...siteContent.skills.items]
 const categories = [...siteContent.skills.categories]
-const MARQUEE_COPIES = 3
-
 function SkillIconTile({ skill, accent }: { skill: Skill; accent: string }) {
   const [imageFailed, setImageFailed] = useState(false)
   const useMask = Boolean(skill.iconSrc) && skill.iconMode === "mask"
@@ -25,10 +24,10 @@ function SkillIconTile({ skill, accent }: { skill: Skill; accent: string }) {
 
   return (
     <article
-      className="group relative flex h-[164px] w-[152px] shrink-0 flex-col justify-between overflow-hidden p-4 backdrop-blur-sm transition-all duration-300 hover:-translate-y-1"
+      className="group/skill relative flex h-[164px] w-[152px] shrink-0 flex-col justify-between overflow-hidden p-4 backdrop-blur-sm transition-all duration-300 hover:-translate-y-1"
     >
       <div
-        className="absolute inset-0 opacity-0 transition-opacity duration-300 group-hover:opacity-100"
+        className="absolute inset-0 opacity-0 transition-opacity duration-300 group-hover/skill:opacity-100"
         style={{
           background: `linear-gradient(135deg, ${accent}22, transparent 55%, ${accent}18)`,
         }}
@@ -39,61 +38,61 @@ function SkillIconTile({ skill, accent }: { skill: Skill; accent: string }) {
         className="relative flex h-24 items-center justify-center p-3 transition-all duration-300"
         style={{ color: accent }}
       >
-        <div className="absolute left-0 top-0 h-px w-4 rounded-full bg-white/20 transition-opacity duration-300 group-hover:opacity-0" />
-        <div className="absolute left-0 top-0 h-4 w-px rounded-full bg-white/20 transition-opacity duration-300 group-hover:opacity-0" />
-        <div className="absolute right-0 top-0 h-px w-4 rounded-full bg-white/20 transition-opacity duration-300 group-hover:opacity-0" />
-        <div className="absolute right-0 top-0 h-4 w-px rounded-full bg-white/20 transition-opacity duration-300 group-hover:opacity-0" />
-        <div className="absolute bottom-0 left-0 h-px w-4 rounded-full bg-white/20 transition-opacity duration-300 group-hover:opacity-0" />
-        <div className="absolute bottom-0 left-0 h-4 w-px rounded-full bg-white/20 transition-opacity duration-300 group-hover:opacity-0" />
-        <div className="absolute bottom-0 right-0 h-px w-4 rounded-full bg-white/20 transition-opacity duration-300 group-hover:opacity-0" />
-        <div className="absolute bottom-0 right-0 h-4 w-px rounded-full bg-white/20 transition-opacity duration-300 group-hover:opacity-0" />
+        <div className="absolute left-0 top-0 h-px w-4 rounded-full bg-white/20 transition-opacity duration-300 group-hover/skill:opacity-0" />
+        <div className="absolute left-0 top-0 h-4 w-px rounded-full bg-white/20 transition-opacity duration-300 group-hover/skill:opacity-0" />
+        <div className="absolute right-0 top-0 h-px w-4 rounded-full bg-white/20 transition-opacity duration-300 group-hover/skill:opacity-0" />
+        <div className="absolute right-0 top-0 h-4 w-px rounded-full bg-white/20 transition-opacity duration-300 group-hover/skill:opacity-0" />
+        <div className="absolute bottom-0 left-0 h-px w-4 rounded-full bg-white/20 transition-opacity duration-300 group-hover/skill:opacity-0" />
+        <div className="absolute bottom-0 left-0 h-4 w-px rounded-full bg-white/20 transition-opacity duration-300 group-hover/skill:opacity-0" />
+        <div className="absolute bottom-0 right-0 h-px w-4 rounded-full bg-white/20 transition-opacity duration-300 group-hover/skill:opacity-0" />
+        <div className="absolute bottom-0 right-0 h-4 w-px rounded-full bg-white/20 transition-opacity duration-300 group-hover/skill:opacity-0" />
         <div
-          className="absolute left-0 top-0 h-px w-4 rounded-full opacity-0 blur-[1px] transition-opacity duration-300 group-hover:opacity-100"
+          className="absolute left-0 top-0 h-px w-4 rounded-full opacity-0 blur-[1px] transition-opacity duration-300 group-hover/skill:opacity-100"
           style={{ backgroundColor: accent, boxShadow: `0 0 10px ${accent}` }}
         />
         <div
-          className="absolute left-0 top-0 h-4 w-px rounded-full opacity-0 blur-[1px] transition-opacity duration-300 group-hover:opacity-100"
+          className="absolute left-0 top-0 h-4 w-px rounded-full opacity-0 blur-[1px] transition-opacity duration-300 group-hover/skill:opacity-100"
           style={{ backgroundColor: accent, boxShadow: `0 0 10px ${accent}` }}
         />
         <div
-          className="absolute right-0 top-0 h-px w-4 rounded-full opacity-0 blur-[1px] transition-opacity duration-300 group-hover:opacity-100"
+          className="absolute right-0 top-0 h-px w-4 rounded-full opacity-0 blur-[1px] transition-opacity duration-300 group-hover/skill:opacity-100"
           style={{ backgroundColor: accent, boxShadow: `0 0 10px ${accent}` }}
         />
         <div
-          className="absolute right-0 top-0 h-4 w-px rounded-full opacity-0 blur-[1px] transition-opacity duration-300 group-hover:opacity-100"
+          className="absolute right-0 top-0 h-4 w-px rounded-full opacity-0 blur-[1px] transition-opacity duration-300 group-hover/skill:opacity-100"
           style={{ backgroundColor: accent, boxShadow: `0 0 10px ${accent}` }}
         />
         <div
-          className="absolute bottom-0 left-0 h-px w-4 rounded-full opacity-0 blur-[1px] transition-opacity duration-300 group-hover:opacity-100"
+          className="absolute bottom-0 left-0 h-px w-4 rounded-full opacity-0 blur-[1px] transition-opacity duration-300 group-hover/skill:opacity-100"
           style={{ backgroundColor: accent, boxShadow: `0 0 10px ${accent}` }}
         />
         <div
-          className="absolute bottom-0 left-0 h-4 w-px rounded-full opacity-0 blur-[1px] transition-opacity duration-300 group-hover:opacity-100"
+          className="absolute bottom-0 left-0 h-4 w-px rounded-full opacity-0 blur-[1px] transition-opacity duration-300 group-hover/skill:opacity-100"
           style={{ backgroundColor: accent, boxShadow: `0 0 10px ${accent}` }}
         />
         <div
-          className="absolute bottom-0 right-0 h-px w-4 rounded-full opacity-0 blur-[1px] transition-opacity duration-300 group-hover:opacity-100"
+          className="absolute bottom-0 right-0 h-px w-4 rounded-full opacity-0 blur-[1px] transition-opacity duration-300 group-hover/skill:opacity-100"
           style={{ backgroundColor: accent, boxShadow: `0 0 10px ${accent}` }}
         />
         <div
-          className="absolute bottom-0 right-0 h-4 w-px rounded-full opacity-0 blur-[1px] transition-opacity duration-300 group-hover:opacity-100"
+          className="absolute bottom-0 right-0 h-4 w-px rounded-full opacity-0 blur-[1px] transition-opacity duration-300 group-hover/skill:opacity-100"
           style={{ backgroundColor: accent, boxShadow: `0 0 10px ${accent}` }}
         />
         <div
-          className="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-300 group-hover:opacity-100"
+          className="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-300 group-hover/skill:opacity-100"
           style={{
             boxShadow: `inset 0 0 10px ${accent}1f, 0 0 12px ${accent}12, 0 0 24px ${accent}0d`,
           }}
         />
         <div
-          className="absolute inset-x-5 bottom-3 h-px opacity-70 transition-opacity duration-300 group-hover:opacity-100"
+          className="absolute inset-x-5 bottom-3 h-px opacity-70 transition-opacity duration-300 group-hover/skill:opacity-100"
           style={{
             background: `linear-gradient(90deg, transparent, ${accent}55, transparent)`,
           }}
         />
         {useMask ? (
           <div
-            className="relative z-10 h-13 w-13 transition-all duration-300 group-hover:scale-105"
+            className="relative z-10 h-13 w-13 transition-all duration-300 group-hover/skill:scale-105"
             style={
               {
                 backgroundColor: iconColor,
@@ -116,18 +115,18 @@ function SkillIconTile({ skill, accent }: { skill: Skill; accent: string }) {
             width={52}
             height={52}
             onError={() => setImageFailed(true)}
-            className="relative z-10 h-13 w-13 object-contain opacity-95 transition-all duration-300 group-hover:scale-105 group-hover:opacity-100"
+            className="relative z-10 h-13 w-13 object-contain opacity-95 transition-all duration-300 group-hover/skill:scale-105 group-hover/skill:opacity-100"
           />
         ) : (
-          <div className="relative z-10 h-12 w-12 transition-all duration-300 group-hover:scale-105">
-            <div className="absolute inset-0 rotate-45 border border-current/40 bg-current/8 transition-all duration-300 group-hover:border-current group-hover:bg-current/12" />
+          <div className="relative z-10 h-12 w-12 transition-all duration-300 group-hover/skill:scale-105">
+            <div className="absolute inset-0 rotate-45 border border-current/40 bg-current/8 transition-all duration-300 group-hover/skill:border-current group-hover/skill:bg-current/12" />
             <div className="absolute inset-[9px] border border-current/30" />
           </div>
         )}
       </div>
 
       <div className="relative space-y-2">
-        <h4 className="text-sm font-semibold tracking-[0.18em] uppercase text-white/45 transition-colors duration-300 group-hover:text-white">
+        <h4 className="text-sm font-semibold tracking-[0.18em] uppercase text-white/45 transition-colors duration-300 group-hover/skill:text-white">
           {skill.name}
         </h4>
       </div>
@@ -144,7 +143,11 @@ function SkillsCarouselRow({ category, skills, isVisible, index }: { category: s
   }
 
   const accent = categoryColors[category]
-  const repeatedSkills = Array.from({ length: MARQUEE_COPIES }, () => skills).flat()
+  const logos: LogoItem[] = skills.map((skill) => ({
+    node: <SkillIconTile skill={skill} accent={accent} />,
+    ariaLabel: skill.name,
+    title: skill.name,
+  }))
 
   return (
     <div
@@ -169,18 +172,17 @@ function SkillsCarouselRow({ category, skills, isVisible, index }: { category: s
       <div className="relative overflow-hidden">
         <div className="pointer-events-none absolute inset-y-0 left-0 z-10 w-16 bg-gradient-to-r from-secondary to-transparent" />
         <div className="pointer-events-none absolute inset-y-0 right-0 z-10 w-16 bg-gradient-to-l from-secondary to-transparent" />
-        <div
-          className="skills-marquee flex w-max gap-4"
-          style={{
-            animationDirection: index % 2 === 0 ? "normal" : "reverse",
-            animationPlayState: isVisible ? "running" : "paused",
-            ["--marquee-shift" as string]: `calc(-100% / ${MARQUEE_COPIES})`,
-          }}
-        >
-          {repeatedSkills.map((skill, skillIndex) => (
-            <SkillIconTile key={`${category}-${skill.name}-${skillIndex}`} skill={skill} accent={accent} />
-          ))}
-        </div>
+        <LogoLoop
+          logos={logos}
+          speed={isVisible ? (index % 2 === 0 ? 70 : -70) : 0}
+          gap={16}
+          logoHeight={164}
+          scaleOnHover={false}
+          pauseOnHover
+          fadeOut={false}
+          ariaLabel={`${category} skills loop`}
+          className="w-full"
+        />
       </div>
     </div>
   )

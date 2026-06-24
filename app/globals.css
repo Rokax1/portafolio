@@ -154,15 +154,6 @@
   animation: border-flow 3s ease infinite;
 }
 
-.skills-marquee {
-  animation: skills-marquee 20s linear infinite;
-  will-change: transform;
-}
-
-.skills-marquee:hover {
-  animation-play-state: paused;
-}
-
 /* Neon Glow Effects */
 .neon-glow-cyan {
   box-shadow: 

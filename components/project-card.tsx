@@ -2,6 +2,7 @@
 
 import Image from "next/image"
 import { ExternalLink, Github, Zap } from "lucide-react"
+import GlareHover from "@/components/GlareHover"
 import { withBasePath } from "@/lib/base-path"
 
 interface ProjectCardProps {
@@ -12,6 +13,7 @@ interface ProjectCardProps {
   liveUrl?: string
   githubUrl?: string
   featured?: boolean
+  accentBorder?: boolean
   featuredLabel: string
   liveLabel: string
   sourceLabel: string
@@ -25,16 +27,32 @@ export function ProjectCard({
   liveUrl,
   githubUrl,
   featured = false,
+  accentBorder = false,
   featuredLabel,
   liveLabel,
   sourceLabel,
 }: ProjectCardProps) {
   const projectImageSrc = withBasePath(imageSrc)
+  const hasAccentBorder = featured || accentBorder
 
   return (
-    <article
-      className={`group relative overflow-hidden bg-card border transition-all duration-500 ${
-        featured ? "border-neon-cyan/50 md:col-span-2" : "border-border hover:border-neon-cyan/50"
+    <GlareHover
+      width="100%"
+      height="auto"
+      background="var(--card)"
+      borderRadius="0px"
+      borderColor={hasAccentBorder ? "rgb(0 220 255 / 0.5)" : "hsl(var(--border))"}
+      glareColor="#00dcff"
+      glareOpacity={0.18}
+      glareAngle={-35}
+      glareSize={180}
+      transitionDuration={700}
+      className={`group relative overflow-hidden transition-all duration-500 ${
+        featured
+          ? "border-neon-cyan/50 md:col-span-2"
+          : hasAccentBorder
+            ? "border-neon-cyan/50"
+            : "border-border hover:border-neon-cyan/50"
       }`}
     >
       {featured && (
@@ -51,7 +69,7 @@ export function ProjectCard({
           fill
           priority={featured}
           sizes={featured ? "(min-width: 768px) 66vw, 100vw" : "(min-width: 768px) 50vw, 100vw"}
-          className="object-cover transition-transform duration-1000 ease-out group-hover:scale-[1.03]"
+          className="object-cover"
         />
         <div className="absolute inset-0 bg-gradient-to-t from-card via-card/50 to-transparent" />
       </div>
@@ -100,10 +118,6 @@ export function ProjectCard({
         </div>
       </div>
 
-      <div className="absolute top-0 left-0 w-4 h-4 border-l-2 border-t-2 border-neon-cyan/0 group-hover:border-neon-cyan transition-colors duration-300" />
-      <div className="absolute top-0 right-0 w-4 h-4 border-r-2 border-t-2 border-neon-cyan/0 group-hover:border-neon-cyan transition-colors duration-300" />
-      <div className="absolute bottom-0 left-0 w-4 h-4 border-l-2 border-b-2 border-neon-cyan/0 group-hover:border-neon-cyan transition-colors duration-300" />
-      <div className="absolute bottom-0 right-0 w-4 h-4 border-r-2 border-b-2 border-neon-cyan/0 group-hover:border-neon-cyan transition-colors duration-300" />
-    </article>
+    </GlareHover>
   )
 }
