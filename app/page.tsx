@@ -4,6 +4,7 @@ import { ProjectsSection } from "@/components/projects-section"
 import { SkillsSection } from "@/components/skills-section"
 import { ContactSection } from "@/components/contact-section"
 import { Footer } from "@/components/footer"
+import { SkillsContactBackground } from "@/components/skills-contact-background"
 
 export default function Home() {
   return (
@@ -11,8 +12,13 @@ export default function Home() {
       <Navigation />
       <HeroSection />
       <ProjectsSection />
-      <SkillsSection />
-      <ContactSection />
+      <div className="relative overflow-hidden">
+        <SkillsContactBackground />
+        <div className="relative z-10">
+          <SkillsSection />
+          <ContactSection />
+        </div>
+      </div>
       <Footer />
     </main>
   )

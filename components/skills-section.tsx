@@ -170,8 +170,8 @@ function SkillsCarouselRow({ category, skills, isVisible, index }: { category: s
       </div>
 
       <div className="relative overflow-hidden">
-        <div className="pointer-events-none absolute inset-y-0 left-0 z-10 w-16 bg-gradient-to-r from-secondary to-transparent" />
-        <div className="pointer-events-none absolute inset-y-0 right-0 z-10 w-16 bg-gradient-to-l from-secondary to-transparent" />
+        <div className="pointer-events-none absolute inset-y-0 left-0 z-10 w-16 bg-gradient-to-r from-background to-transparent" />
+        <div className="pointer-events-none absolute inset-y-0 right-0 z-10 w-16 bg-gradient-to-l from-background to-transparent" />
         <LogoLoop
           logos={logos}
           speed={isVisible ? (index % 2 === 0 ? 70 : -70) : 0}
@@ -210,15 +210,15 @@ export function SkillsSection() {
   }, [])
 
   return (
-    <section ref={sectionRef} id="skills" className="relative py-32 px-4 md:px-8 bg-secondary overflow-hidden">
+    <section ref={sectionRef} id="skills" className="relative py-32 px-4 md:px-8 bg-background overflow-hidden">
       <div className="absolute -top-px left-0 right-0 h-24 bg-background clip-diagonal-bottom" />
 
       <div className="absolute inset-0">
-        <div className="absolute top-1/2 left-0 w-1/2 h-px bg-gradient-to-r from-transparent via-neon-cyan/20 to-transparent" />
-        <div className="absolute top-1/2 right-0 w-1/2 h-px bg-gradient-to-l from-transparent via-neon-magenta/20 to-transparent" />
+        <div className="absolute top-1/2 left-0 w-1/2 h-px bg-gradient-to-r from-transparent via-neon-cyan/10 to-transparent" />
+        <div className="absolute top-1/2 right-0 w-1/2 h-px bg-gradient-to-l from-transparent via-neon-magenta/10 to-transparent" />
       </div>
 
-      <div className="relative max-w-7xl mx-auto">
+      <div className="relative z-10 max-w-7xl mx-auto">
         <div className="text-center mb-16">
           <div className="inline-flex items-center gap-4 mb-4">
             <div className="h-px w-12 bg-gradient-to-r from-transparent to-neon-magenta" />
@@ -258,7 +258,7 @@ export function SkillsSection() {
         </div>
       </div>
 
-      <div className="absolute -bottom-px left-0 right-0 h-24 bg-background clip-diagonal-top" />
+      {/* <div className="absolute -bottom-px left-0 right-0 h-24 bg-background clip-diagonal-top" /> */}
     </section>
   )
 }

@@ -7,9 +7,7 @@ export function ProjectsSection() {
   const section = siteContent.projects
 
   return (
-    <section id="projects" className="relative py-32 px-4 md:px-8 overflow-hidden">
-      <div className="absolute inset-0 cyber-grid opacity-50" />
-
+    <section id="projects" className="relative py-32 px-4 md:px-8 bg-background overflow-hidden">
       <div className="relative max-w-7xl mx-auto">
         <div className="text-center mb-16">
           <div className="inline-flex items-center gap-4 mb-4">
