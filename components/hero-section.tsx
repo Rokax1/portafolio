@@ -109,6 +109,7 @@ export function HeroSection() {
           rippleIntensity={rippleIntensity}
           fadeDistance={EXPERIMENTAL_FADE_DISTANCE}
           vignetteStrength={EXPERIMENTAL_VIGNETTE_STRENGTH}
+          opacity={1}
           gridRotation={rippleRotation}
           mouseInteractionRadius={EXPERIMENTAL_MOUSE_INTERACTION_RADIUS}
         />

@@ -3,6 +3,7 @@
 import { useState } from "react"
 import { Send, MapPin, Mail, Terminal } from "lucide-react"
 import { siteContent } from "@/lib/site-content"
+import { SectionRippleBackground } from "./section-ripple-background"
 
 export function ContactSection() {
   const contact = siteContent.contact
@@ -56,11 +57,9 @@ export function ContactSection() {
   }
 
   return (
-    <section id="contact" className="relative py-32 px-4 md:px-8 overflow-hidden cyber-grid">
-      <div className="pointer-events-none absolute top-0 left-0 right-0 h-24 bg-gradient-to-b from-background via-background/80 to-transparent" />
-      <div className="absolute inset-0 pointer-events-none overflow-hidden opacity-20">
-        <div className="absolute w-full h-px bg-neon-cyan/50" style={{ animation: "scan-line 4s linear infinite" }} />
-      </div>
+    <section id="contact" className="relative py-32 px-4 md:px-8 overflow-hidden">
+      <SectionRippleBackground />
+      <div className="pointer-events-none absolute top-0 left-0 right-0 z-10 h-24 bg-gradient-to-b from-background via-background/80 to-transparent" />
 
       <div className="relative max-w-5xl mx-auto">
         <div className="text-center mb-16">
